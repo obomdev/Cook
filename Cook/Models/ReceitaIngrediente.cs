@@ -20,7 +20,6 @@ public class ReceitaIngrediente
     [StringLength(30)]
     public string Quantidade { get; set; }
 
-    [Required]
     [StringLength(200)]
     public string Preparo { get; set; }
 }

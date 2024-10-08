@@ -7,7 +7,7 @@ namespace Cook.Data;
 
 public class AppDbContext : IdentityDbContext
 {
-    public AppDbContext(AppDbContextOptions<AppDbContext> options) : base(options) 
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
     {
     }
 
@@ -16,7 +16,7 @@ public class AppDbContext : IdentityDbContext
     public DbSet<Ingrediente> Ingredientes { get; set; }
     public DbSet<Receita> Receitas { get; set; }
     public DbSet<ReceitaIngrediente> ReceitaIngredientes { get; set; }
-    public DbSet<Usuatio> Usuarios { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -13,7 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(
     opt => opt.SignIn.RequireConfirmedEmail = true
 )
-
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
 
 
 builder.Services.AddControllersWithViews();
@@ -33,6 +34,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -2,7 +2,7 @@ using Cook.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace GCook.Data;
+namespace Cook.Data;
 
 public class AppDbSeed
 {
@@ -139,7 +139,7 @@ public class AppDbSeed
                 Nome = "Carne Moída Mexicana",
                 Descricao = "Prato perfeito para um lanche rápido ou mesmo uma refeição picante. Carne moída, pimentões, temperos e muito queijooooo",
                 CategoriaId = 4,
-                Dificuldade = Dificuldade.Fácil,
+                Dificuldade = Dificuldade.Facil,
                 Rendimento = 3,
                 TempoPreparo = "20 minutos",
                 Foto = "/img/receitas/1.jpg",
