@@ -8,7 +8,7 @@ public class EmailSender : IEmailSender
     public async Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
         var mail = "cook.app@outlook.com";
-        var pw = "";
+        var pw = "QV3E4khpZBEcL7K";
 
         var cliente = new SmtpClient("smtp-mail.oulook.com", 587)
         {

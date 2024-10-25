@@ -23,7 +23,7 @@ public class AccountController : Controller
     {
         LoginVm login = new()
         {
-            UrlRetorno = returnUrl ?? Url.Conten("~/")
+            UrlRetorno = returnUrl ?? Url.Content("~/")
         };
         return View(login);
     }
@@ -40,8 +40,61 @@ public class AccountController : Controller
             if (result.IsLockedOut)
                 return RedirectToAction("Lockout");
             if (result.IsNotAllowed)
-                ModelState.AddModelError(string.Empty, "Sua")
+                ModelState.AddModelError(string.Empty, "Sua não está confirmada, verifique seu email!");
+            else
+                ModelState.AddModelError(string.Empty, "Usuário e/ou Senha Inválidos!");
         }
+        return View(login);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Logout()
+    {
+        await _usuarioService.LogoffUsuario();
+        return RedirectToAction("Index", "Home");
+    }
+
+    [HttpGet]
+    public IActionResult Registro()
+    {
+        RegistroVm register = new();
+        return View(register);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Registro(RegistroVm register)
+    {
+        register.Enviado = false;
+        if (ModelState.IsValid)
+        {
+            var result = await _usuarioService.RegistrarUsuario(register);
+            if (result != null)
+                foreach (var error in result)
+                {
+                    ModelState.AddModelError(string.Empty, error);
+                }
+                register.Enviado = result == null;
+        }
+        return View(register);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ConfirmarEmail(string userId, string code)
+    {
+        if (userId == null || code == null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+        await _usuarioService.ConfirmarEmail(userId, code);
+        return View(true);
+    }
+    
+    [ResponseCache(Duration =0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View("Error!");
     }
 }
 
