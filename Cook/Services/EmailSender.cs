@@ -5,7 +5,7 @@ namespace Cook.Services;
 
 public class EmailSender : IEmailSender
 {
-    public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+    public async Task SendEmailAsync(string emailAddress, string subject, string htmlMessage)
     {
         var mail = "cook.app@outlook.com";
         var pw = "QV3E4khpZBEcL7K";
