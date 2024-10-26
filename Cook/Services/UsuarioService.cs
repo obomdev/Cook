@@ -88,12 +88,12 @@ public class UsuarioService : IUsuarioService
 
     public async Task<SignInResult> LoginUsuario(LoginVm login)
     {
-        string UserName = login.Email;
+        string userName = login.Email;
         if (Helper.IsValidEmail(login.Email))
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
             if (user != null)
-                UserName = user.UserName;
+                userName = user.UserName;
         }
 
         var result = await _signInManager.PasswordSignInAsync(
